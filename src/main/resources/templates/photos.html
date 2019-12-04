@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Photos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        .thumb img  {
+            border: 2px solid #000000; /* Рамка вокруг фотографии */
+            padding: 5px; /* Расстояние от картинки до рамки */
+            background: #666; /* Цвет фона */
+            margin-right: 10px; /* Отступ справа */
+            margin-bottom: 10px; /* Отступ снизу */
+        }
+    </style>
+</head>
+<body>
+<p class="thumb">
+<img th:each="image : ${name}" th:src="${image.path}" th:width="${image.width}" th:height="${image.height}" th:alt="Дедлайн">
+</p>
+
+</body>
+</html>
