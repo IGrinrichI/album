@@ -24,8 +24,8 @@ public class PhotosController {
     }
 
     @GetMapping("/photos")
-    public String photos(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        String path = System.getProperty("user.dir") + "/src/main/resources/static/images";
+    public String photos(@RequestParam(name="name", required=false, defaultValue="") String name, Model model) {
+        String path = System.getProperty("user.dir") + "/src/main/resources/static/images/" + name;
         File myFolder = new File(path);
         File[] files = myFolder.listFiles();
         ArrayList<ImgData> images = new ArrayList<ImgData>();
@@ -33,10 +33,9 @@ public class PhotosController {
         int width          = bimg.getWidth();
         int height         = bimg.getHeight();*/
         for(int i = 0; i < files.length; i++){
-            for(int j = 0; j < 100; j++){
-                images.add(new ImgData("/images/"+files[i].getName(),66,66));
+            if(!files[i].isDirectory()){
+                images.add(new ImgData("/images/" + name + "/" + files[i].getName(),66,66));
             }
-
         }
         model.addAttribute("name", images);
         return "photos";
